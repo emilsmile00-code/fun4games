@@ -5,20 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fun4Games - Play & Earn</title>
 <style>
-body, html {margin:0;padding:0;font-family:sans-serif;overflow-x:hidden;}
-#landing {height:100vh; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end; background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb); background-size:400% 400%; animation:gradientBG 15s ease infinite; color:white; text-align:center; padding:20px; box-sizing:border-box;}
-@keyframes gradientBG {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-#startButton {padding:15px 30px; font-size:1.2em; border:none; border-radius:10px; background:#ff5722; color:white; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3); transition: transform 0.2s, box-shadow 0.2s; position:fixed; bottom:20px; right:20px;}
-#startButton:hover {transform:scale(1.1); box-shadow:0 8px 15px rgba(0,0,0,0.4);}
-#pointsPreview {position:fixed; top:20px; right:20px; font-size:1.2em; color:black; font-weight:bold;}
-nav {position:sticky; top:0; background:#222; color:white; display:flex; justify-content:center; gap:15px; padding:10px 0; z-index:100;}
-nav button {background:#4caf50; border:none; border-radius:10px; padding:10px 15px; font-size:16px; cursor:pointer; color:white; transition:0.2s;}
-nav button:hover {background:#43a047;}
-section {padding:20px; min-height:80vh; display:none;}
-#games {display:flex; flex-wrap:wrap; justify-content:center; gap:20px;}
-.gameCard {background:white; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.2); width:250px; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: transform 0.3s; cursor:pointer;}
-.gameCard:hover {transform:scale(1.05);}
-footer {position:sticky; bottom:0; background:#222; color:white; text-align:center; padding:10px 0;}
+/* Basic styling for layout, games, buttons, sections */
+body, html{margin:0;padding:0;font-family:sans-serif;overflow-x:hidden;}
+#landing{height:100vh; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end; background:linear-gradient(135deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb); background-size:400% 400%; animation:gradientBG 15s ease infinite; color:white; text-align:center; padding:20px; box-sizing:border-box;}
+@keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#startButton{padding:15px 30px; font-size:1.2em; border:none; border-radius:10px; background:#ff5722; color:white; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3); transition:transform 0.2s,box-shadow 0.2s; position:fixed; bottom:20px; right:20px;}
+#startButton:hover{transform:scale(1.1); box-shadow:0 8px 15px rgba(0,0,0,0.4);}
+#pointsPreview{position:fixed; top:20px; right:20px; font-size:1.2em; color:black; font-weight:bold;}
+nav{position:sticky;top:0;background:#222;color:white;display:flex;justify-content:center;gap:15px;padding:10px 0;z-index:100;}
+nav button{background:#4caf50;border:none;border-radius:10px;padding:10px 15px;font-size:16px;cursor:pointer;color:white;transition:0.2s;}
+nav button:hover{background:#43a047;}
+section{padding:20px;min-height:80vh; display:none;}
+#games{display:flex; flex-wrap:wrap; justify-content:center; gap:20px;}
+.gameCard{background:white;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.2);width:250px;height:300px;display:flex; flex-direction:column;justify-content:center;align-items:center; transition: transform 0.3s; cursor:pointer;}
+.gameCard:hover{transform:scale(1.05);}
+.gameContainer{display:none; flex-direction:column; justify-content:center; align-items:center; margin-top:20px;}
+footer{position:sticky; bottom:0; background:#222; color:white; text-align:center; padding:10px 0;}
 </style>
 </head>
 <body>
@@ -27,7 +29,6 @@ footer {position:sticky; bottom:0; background:#222; color:white; text-align:cent
 <h1>Welcome to Fun4Games!</h1>
 <button id="startButton">Click to Start & Earn!</button>
 </div>
-
 <div id="mainContent">
 <nav>
 <button onclick="showSection('gamesSection')">Games</button>
@@ -37,37 +38,43 @@ footer {position:sticky; bottom:0; background:#222; color:white; text-align:cent
 <button onclick="showSection('profileSection')">Profile</button>
 <button onclick="showSection('offerwallSection')">Offerwalls</button>
 </nav>
-
 <section id="gamesSection">
 <h2>Games</h2>
 <div id="games">
-<div class="gameCard" onclick="alert('Gold Miner Clicker!')"><h3>Gold Miner Clicker</h3></div>
-<div class="gameCard" onclick="alert('Dodge & Catch!')"><h3>Dodge & Catch</h3></div>
-<div class="gameCard" onclick="alert('Speed Tap Challenge!')"><h3>Speed Tap Challenge</h3></div>
-<div class="gameCard" onclick="alert('Memory Match!')"><h3>Memory Match</h3></div>
-<div class="gameCard" onclick="alert('Jungle Run!')"><h3>Jungle Run</h3></div>
-<div class="gameCard" onclick="alert('Treasure Hunt Maze!')"><h3>Treasure Hunt Maze</h3></div>
+<div class="gameCard" onclick="startClicker()"><h3>Gold Miner Clicker</h3></div>
+<div class="gameCard" onclick="startDodge()"><h3>Dodge & Catch</h3></div>
+<div class="gameCard" onclick="startReaction()"><h3>Speed Tap Challenge</h3></div>
+<div class="gameCard" onclick="startMemory()"><h3>Memory Match</h3></div>
+<div class="gameCard" onclick="startJungle()"><h3>Jungle Run</h3></div>
+<div class="gameCard" onclick="startMaze()"><h3>Treasure Hunt Maze</h3></div>
+</div>
+<div id="gameContainers">
+<!-- Individual game containers inserted by JS -->
 </div>
 </section>
-
 <section id="updateSection"><h2>Updates</h2><p>Latest news and offers here.</p></section>
 <section id="taskSection"><h2>Tasks</h2><p>Complete tasks to earn points!</p></section>
 <section id="leaderboardSection"><h2>Leaderboard</h2><p id="leaderboardContent">Top players will appear here.</p></section>
 <section id="profileSection"><h2>Profile</h2><p>Points Earned: <span id="profilePoints">0</span></p></section>
 <section id="offerwallSection"><h2>Offerwalls</h2><p>Offerwall ads here.</p></section>
-
 <footer><p>Ads go here</p></footer>
 </div>
-
 <script>
+let totalPoints=0;
 const startBtn=document.getElementById('startButton');
 const landing=document.getElementById('landing');
 const mainContent=document.getElementById('mainContent');
-let totalPoints=0;
 startBtn.addEventListener('click',()=>{landing.style.display='none'; mainContent.style.display='block';});
 function showSection(id){document.querySelectorAll('section').forEach(s=>s.style.display='none'); document.getElementById(id).style.display='block';}
 showSection('gamesSection');
 function addPoints(p){totalPoints+=p; document.getElementById('pointsCounter').textContent=totalPoints; document.getElementById('profilePoints').textContent=totalPoints; document.getElementById('leaderboardContent').textContent=`Total Points: ${totalPoints}`;}
+// Placeholder game functions for demo. Replace with full logic for interactive games
+function startClicker(){alert('Gold Miner Clicker started!'); addPoints(10);}
+function startDodge(){alert('Dodge & Catch started!'); addPoints(10);}
+function startReaction(){alert('Speed Tap Challenge started!'); addPoints(10);}
+function startMemory(){alert('Memory Match started!'); addPoints(10);}
+function startJungle(){alert('Jungle Run started!'); addPoints(10);}
+function startMaze(){alert('Treasure Hunt Maze started!'); addPoints(10);}
 </script>
 </body>
 </html>
